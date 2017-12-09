@@ -9,6 +9,7 @@ password = sys.argv[2]
 in_repositories = sys.argv[3:len(sys.argv)]
 url = "https://api.bitbucket.org/2.0/repositories/{}".format(user)
 
+
 password_manager = urllib2.HTTPPasswordMgrWithPriorAuth()
 password_manager.add_password(None, url, user, password, is_authenticated=True)
 auth_manager = urllib2.HTTPBasicAuthHandler(password_manager)
@@ -49,7 +50,7 @@ def all_pullrequests(in_repositories):
         data = to_dict(data)
         for i in data['values']:
             total_pullrequests.append(i['links']['html']['href'])
-    if len(total_pullrequests) >= 10:
+    if len(total_pullrequests) >= 10 and len(sys.argv) == 3:
         print('Too many pullrequests, try to filter by repo')
         sys.exit()
     else:
