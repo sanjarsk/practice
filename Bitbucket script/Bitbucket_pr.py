@@ -48,7 +48,7 @@ def all_pullrequests(in_repositories):
         data = open_and_read(url)
         data = to_dict(data)
         for i in data['values']:
-            total_pullrequests.append(i['links']['html'])
+            total_pullrequests.append(i['links']['html']['href'])
     if len(total_pullrequests) >= 10:
         print('Too many pullrequests, try to filter by repo')
         sys.exit()
